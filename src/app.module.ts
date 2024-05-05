@@ -1,12 +1,18 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './infra/mongoose/database.modules';
-//mongodb+srv://nabin:nabin@todo.c2gyfjx.mongodb.net/
+import { TodoModule } from './todo/todo.module';
+import { MongooseModelModule } from './mongoose-model.module';
+
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true }), DatabaseModule],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    DatabaseModule,
+    TodoModule,
+    MongooseModelModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
